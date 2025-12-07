@@ -18,7 +18,8 @@ RUN groupadd -r app && useradd -r -g app -d /home/app -s /sbin/nologin app \
 
 USER app
 
-HEALTHCHECK CMD --fail http://localhost:${PORT}/api/health || exit 1
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+    CMD curl -f http://localhost:${PORT}/api/health || exit 1
 
 EXPOSE ${PORT}
 
