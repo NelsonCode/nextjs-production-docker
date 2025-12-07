@@ -5,8 +5,6 @@ FROM oven/bun:1.3.3-slim
 
 WORKDIR /app
 
-COPY bun.lock ./
-
 COPY /public ./public
 
 COPY .next/standalone ./
