@@ -1,8 +1,0 @@
-ui
-app
-node_modules
-README.md
-.gitignore
-eslint.config.js
-postcss.config.mjs
-tsconfig.json
