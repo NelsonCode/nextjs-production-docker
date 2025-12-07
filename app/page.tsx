@@ -9,12 +9,21 @@ type Course = {
   description: string;
 };
 
-export default async function Home() {
-  const endpoint = `${process.env.NEXT_PUBLIC_API_URL}/api/courses`;
+async function getCourses() {
+  const res = await fetch(`${process.env.API_URL}/api/courses`, {
+    cache: "no-store",
+  });
 
-  const data = (await fetch(endpoint).then((res) => res.json())) as {
-    courses: Course[];
-  };
+  if (!res.ok) {
+    throw new Error("Failed to fetch data");
+  }
+
+  return res.json() as Promise<{ courses: Course[] }>;
+}
+
+export default async function Home() {
+  const data = await getCourses();
+
   return (
     <main>
       <div className="max-w-7xl m-auto mt-10 px-3">
